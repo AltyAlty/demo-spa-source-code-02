@@ -11,5 +11,5 @@ const reactRootEl = createRoot(rootEl);
 reactRootEl.render(
     <StrictMode>
         <App/>
-    </StrictMode>,
-)
+    </StrictMode>
+);
