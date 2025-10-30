@@ -1,20 +1,18 @@
-import {useState} from 'react';
-
-const tracks = [
-    {
-        id: 1,
-        title: 'Musicfun soundtrack',
-        url: 'https://musicfun.it-incubator.app/api/samurai-way-soundtrack.mp3'
-    },
-    {
-        id: 2,
-        title: 'Musicfun soundtrack instrumental',
-        url: 'https://musicfun.it-incubator.app/api/samurai-way-soundtrack-instrumental.mp3'
-    }
-];
+import {useState, useEffect} from 'react';
 
 export function App() {
+    const [tracks, setTracks] = useState(null);
     const [selectedTrackId, setSelectedTrackId] = useState(null);
+
+    useEffect(() => {
+        fetch(`${import.meta.env.VITE_BASE_URL}playlists/tracks`, {
+            headers: {
+                'api-key': import.meta.env.VITE_API_KEY,
+            }
+        })
+            .then(res => res.json())
+            .then(json => setTracks(json.data));
+    }, []);
 
     if (!tracks) {
         return <div>
@@ -42,9 +40,9 @@ export function App() {
                             style={{border: track.id === selectedTrackId ? '1px solid orange' : 'none'}}
                         >
                             <div onClick={() => { setSelectedTrackId(track.id); }}>
-                                {track.title}
+                                {track.attributes.title}
                             </div>
-                            <audio src={track.url} controls></audio>
+                            <audio src={track.attributes.attachments[0].url} controls></audio>
                         </li>
                     );
                 })}
