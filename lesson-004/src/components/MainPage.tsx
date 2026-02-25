@@ -4,8 +4,8 @@ import {TracksList} from './TracksList.tsx';
 import {TrackDetails} from './TrackDetails.tsx';
 
 export function MainPage() {
-    const [selectedTrackId, setSelectedTrackId] = useState(null);
-    const onTrackSelectedClick = (trackId) => setSelectedTrackId(trackId);
+    const [selectedTrackId, setSelectedTrackId] = useState<string | null>(null);
+    const onTrackSelectedClick = (trackId: string | null) => setSelectedTrackId(trackId);
 
     return <div>
         <PageTitle/>

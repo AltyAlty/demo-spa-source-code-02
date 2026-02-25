@@ -1,8 +1,13 @@
 import {useState, useEffect} from 'react';
-import {TrackItem} from './TrackItem.tsx';
+import {TrackItem, type TrackListItemResourceType} from './TrackItem.tsx';
 
-export function TracksList({selectedTrackId, onTrackSelected}) {
-    const [tracks, setTracks] = useState(null);
+type PropsType = {
+    selectedTrackId: string | null
+    onTrackSelected: (trackId: string | null) => void
+};
+
+export function TracksList({selectedTrackId, onTrackSelected}: PropsType) {
+    const [tracks, setTracks] = useState<Array<TrackListItemResourceType> | null>(null);
 
     useEffect(() => {
         fetch(`${import.meta.env.VITE_BASE_URL}playlists/tracks`, {
@@ -15,7 +20,7 @@ export function TracksList({selectedTrackId, onTrackSelected}) {
     if (!tracks) return <div><span>Loading ...</span></div>;
     if (tracks.length === 0) return <div><span>No tracks</span></div>;
     const onResetSelectionClick = () => onTrackSelected?.(null);
-    const onTrackSelectedClick = (trackId) => onTrackSelected?.(trackId);
+    const onTrackSelectedClick = (trackId: string) => onTrackSelected?.(trackId);
 
     return <div>
         <button onClick={onResetSelectionClick}>Reset selection</button>
