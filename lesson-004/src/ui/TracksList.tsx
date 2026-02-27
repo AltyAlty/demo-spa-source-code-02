@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react';
-import {TrackItem, type TrackListItemResourceType} from './TrackItem.tsx';
+import {TrackItem} from './TrackItem.tsx';
+import {getTracks, type TrackListItemResourceType} from '../dal/api.ts';
 
 type PropsType = {
     selectedTrackId: string | null
@@ -10,11 +11,7 @@ export function TracksList({selectedTrackId, onTrackSelected}: PropsType) {
     const [tracks, setTracks] = useState<Array<TrackListItemResourceType> | null>(null);
 
     useEffect(() => {
-        fetch(`${import.meta.env.VITE_BASE_URL}playlists/tracks`, {
-            headers: {'api-key': import.meta.env.VITE_API_KEY}
-        })
-            .then(res => res.json())
-            .then(json => setTracks(json.data));
+        getTracks().then(json => setTracks(json.data));
     }, []);
 
     if (!tracks) return <div><span>Loading ...</span></div>;

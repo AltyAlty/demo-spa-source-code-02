@@ -1,6 +1,6 @@
 import {createRoot} from 'react-dom/client';
 import './index.css';
-import {MainPage} from './components/MainPage.tsx';
+import {MainPage} from './ui/MainPage.tsx';
 
 /*В TypeScript знак "!" означает, что мы уверены, что какой-то элемент не равен null или undefined, даже если TypeScript
 думает, что он может быть null.*/

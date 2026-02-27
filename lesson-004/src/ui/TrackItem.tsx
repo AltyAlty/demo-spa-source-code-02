@@ -1,14 +1,4 @@
-type TrackAttachmentType = Array<{ url: string }>;
-
-type TrackListItemAttributes = {
-    title: string
-    attachments: TrackAttachmentType
-};
-
-export type TrackListItemResourceType = {
-    id: string
-    attributes: TrackListItemAttributes
-};
+import type {TrackListItemResourceType} from '../dal/api.ts';
 
 type PropsType = {
     track: TrackListItemResourceType

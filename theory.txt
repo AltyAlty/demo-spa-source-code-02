@@ -166,3 +166,6 @@ Type guard - это код, который добавляет проверку, 
 LESSON 021:
 
 Компилирование TypeScript-файлов в JavaScript-файлы в Vite-проекте: npm run build
+
+LESSON 022:
+
