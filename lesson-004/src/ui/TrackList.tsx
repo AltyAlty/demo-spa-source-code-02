@@ -1,6 +1,7 @@
 import {TrackItem} from './TrackItem.tsx';
 import {useTracks} from '../bll/useTracks.tsx';
 import type {TrackListItemResourceType} from '../dal/api.ts';
+import styles from './TrackList.module.css';
 
 type PropsType = {
     selectedTrackId: string | null
@@ -23,7 +24,7 @@ export const TrackList = ({selectedTrackId, onTrackSelected}: PropsType) => {
         <button onClick={onResetSelectionClick}>Reset selection</button>
         <button onClick={onRefreshTracksClick}>Refresh tracks</button>
 
-        <ul>
+        <ul className={styles.tracks}>
             {tracks.map((track) => <TrackItem
                 key={track.id}
                 track={track}

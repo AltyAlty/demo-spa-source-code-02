@@ -11,6 +11,7 @@
     "buildPreview": "tsc -b && vite build && vite preview"
   },
   "dependencies": {
+    "clsx": "^2.1.1",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
   },

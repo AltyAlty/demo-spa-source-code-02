@@ -1,0 +1,9 @@
+.trackDetails {
+    border: 1px solid darkred;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.trackDetails h2 {
+    color: #646cff
+}

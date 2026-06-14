@@ -14,7 +14,7 @@ export const MainPage = () => {
     return <div>
         <PageTitle/>
 
-        <div style={{display: 'flex', gap: '30px'}}>
+        <div style={{display: "flex", gap: "30px"}}>
             <TrackList selectedTrackId={selectedTrackId} onTrackSelected={onTrackSelectedClick}/>
             <TrackDetails trackId={selectedTrackId}/>
         </div>
