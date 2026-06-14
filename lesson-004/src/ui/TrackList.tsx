@@ -1,26 +1,27 @@
-import {useState, useEffect} from 'react';
 import {TrackItem} from './TrackItem.tsx';
-import {getTracks, type TrackListItemResourceType} from '../dal/api.ts';
+import {useTracks} from '../bll/useTracks.tsx';
+import type {TrackListItemResourceType} from '../dal/api.ts';
 
 type PropsType = {
     selectedTrackId: string | null
     onTrackSelected: (trackId: string | null) => void
 };
 
-export function TracksList({selectedTrackId, onTrackSelected}: PropsType) {
-    const [tracks, setTracks] = useState<Array<TrackListItemResourceType> | null>(null);
-
-    useEffect(() => {
-        getTracks().then(json => setTracks(json.data));
-    }, []);
+export const TrackList = ({selectedTrackId, onTrackSelected}: PropsType) => {
+    const {tracks, refreshTracks}: {
+        tracks: TrackListItemResourceType[] | null,
+        refreshTracks: () => void
+    } = useTracks();
 
     if (!tracks) return <div><span>Loading ...</span></div>;
     if (tracks.length === 0) return <div><span>No tracks</span></div>;
-    const onResetSelectionClick = () => onTrackSelected?.(null);
-    const onTrackSelectedClick = (trackId: string) => onTrackSelected?.(trackId);
+    const onResetSelectionClick = (): void => onTrackSelected?.(null);
+    const onRefreshTracksClick = (): void => refreshTracks();
+    const onTrackSelectedClick = (trackId: string): void => onTrackSelected?.(trackId);
 
     return <div>
         <button onClick={onResetSelectionClick}>Reset selection</button>
+        <button onClick={onRefreshTracksClick}>Refresh tracks</button>
 
         <ul>
             {tracks.map((track) => <TrackItem

@@ -1,10 +1,7 @@
-import {createRoot} from 'react-dom/client';
+import {createRoot, type Root} from 'react-dom/client';
 import './index.css';
 import {MainPage} from './ui/MainPage.tsx';
 
-/*В TypeScript знак "!" означает, что мы уверены, что какой-то элемент не равен null или undefined, даже если TypeScript
-думает, что он может быть null.*/
-const rootEl = document.getElementById('root')!;
-const reactRootEl = createRoot(rootEl);
-
+const rootEl: HTMLElement | null = document.getElementById('root')!;
+const reactRootEl: Root = createRoot(rootEl);
 reactRootEl.render(<MainPage/>);
