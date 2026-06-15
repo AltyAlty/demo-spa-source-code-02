@@ -1,0 +1,38 @@
+# Имя конфигурации
+name: Musicfun Deploy
+
+# Что является триггером для запуска данного workflow. В нашем случае это изменения в ветке "main".
+on:
+  push:
+    branches: [main]
+
+# Указываем разрешения для GitHub Actions.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Workflow состоит из jobs. Описываем их.
+jobs:
+  # Описываем job.
+  deploy:
+    # Какое окружение использовать для это job.
+    runs-on: ubuntu-latest
+
+    # Шаги job.
+    steps:
+      # Использовать некоторые предопределенные команды в GitHub Actions.
+      - uses: actions/checkout@v4
+      # Использовать Node.js версии 20.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      # Запустить команды.
+      - run: npm install
+      - run: npm run build
+      # Взять папку "dist".
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+      # Развернуть папку "dist".
+      - uses: actions/deploy-pages@v4

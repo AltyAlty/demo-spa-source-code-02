@@ -23,20 +23,26 @@ export type TrackListItemResourceType = {
 type GetTrackListOutputType = { data: Array<TrackListItemResourceType> };
 type getTracksType = () => Promise<GetTrackListOutputType>;
 
+const prepareHeaders = () => {
+    const apiKey = import.meta.env.VITE_API_KEY;
+    if (!apiKey) return undefined;
+    return {'api-key': apiKey};
+};
+
 export const api: {
     getTrack: getTrackType;
     getTracks: getTracksType;
 } = {
     getTrack: (trackId) => {
         return fetch(`${import.meta.env.VITE_BASE_URL}playlists/tracks/${trackId}`, {
-            headers: {'api-key': import.meta.env.VITE_API_KEY}
+            headers: prepareHeaders()
         })
             .then(res => res.json());
     },
 
     getTracks: () => {
         return fetch(`${import.meta.env.VITE_BASE_URL}playlists/tracks`, {
-            headers: {'api-key': import.meta.env.VITE_API_KEY}
+            headers: prepareHeaders()
         })
             .then(res => res.json());
     }
