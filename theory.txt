@@ -184,3 +184,15 @@ LESSON 025:
 "classnames".
 
 Установка clsx: npm install --save clsx
+
+LESSON 026:
+
+1. git restore --staged file_name - убрать файл из еще не совершенного коммита.
+2. git rm --cached file_name - убрать файл из еще не совершенного коммита и перестать его отслеживать.
+3. git rm -r --cached folder_name - убрать все файлы в папке и подпапках из еще не совершенного коммита и перестать их
+отслеживать.
+4. echo ".idea" >> .gitignore - добавить папку ".idea" в файл ".gitignore".
+5. git diff - увидеть незакоммиченные изменения.
+6. touch file_name - создать новый файл.
+7. git add . - работает так же, как "git add -A", но только в текущей папке и подпапках.
+8. git restore -- file_name - отменить незакоммиченные изменения в файле.
